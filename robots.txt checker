@@ -1,3 +1,12 @@
+#################################################################
+#Objective: 
+# Check robots.txt
+#Description: 
+# Test each entires in robots.txt
+#Date:
+# 20/07/2018
+#################################################################
+
 import urllib2
 
 #clean the robots.txt file
