@@ -1,0 +1,30 @@
+import urllib2
+
+#clean the robots.txt file
+#delete Allow and Disallow directive
+infile = "robots.txt"
+outfile = "cleaned_file.txt"
+
+delete_list = ["Disallow: /", "Allow: /"]
+fin = open(infile)
+fout = open(outfile, "w+")
+
+print("cleaning file...")
+for line in fin:
+    for word in delete_list:
+        line = line.replace(word, "")
+    fout.write(line)
+fin.close()
+fout.close()
+
+cleanfile = "cleaned_file.txt"
+fclean = open(cleanfile)
+
+for entries in fclean:
+    url = "http://192.168.0.15/%s" % entries
+    try:
+        content = urllib2.urlopen(url).read()
+        print "UP: "+entries
+    except:
+        #print "DOWN: "+entries
+        pass
