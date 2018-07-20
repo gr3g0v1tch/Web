@@ -1,6 +1,6 @@
 #################################################################
 #Objective: 
-# Brute-force for login enumeration 
+# Brute-force for user enumeration 
 #Description: 
 # SOAP request BF through POST method to try enumerate usernames 
 #Date:
