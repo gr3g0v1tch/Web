@@ -2,12 +2,12 @@
 #Objective: 
 # Check robots.txt
 #Description: 
-# Test each entires in robots.txt
+# Test each entries in robots.txt
 #Date:
-# 20/07/2018
+# 02/08/2018
 #################################################################
 
-import urllib2
+import requests
 
 #clean the robots.txt file
 #delete Allow and Disallow directive
@@ -29,11 +29,11 @@ fout.close()
 cleanfile = "cleaned_file.txt"
 fclean = open(cleanfile)
 
+match='404 Not Found'
+
 for entries in fclean:
-    url = "http://192.168.0.15/%s" % entries
-    try:
-        content = urllib2.urlopen(url).read()
-        print "UP: "+entries
-    except:
-        #print "DOWN: "+entries
-        pass
+        entries = entries.rstrip("\n")
+        url = "http://192.168.0.7/%s" % entries
+        request = requests.get(url).text
+        if match not in request:
+                print("UP: "+url)
