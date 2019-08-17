@@ -9,23 +9,35 @@
 #################################################################
 
 import requests
+from requests.exceptions import ConnectionError
+import sys
 
 #content return when error
-match='find any posts by author'
+#exemple of a string return from a server "Couldn't find any posts by author"
+match=input("Set the string returned by the server when the ID is incorrect"+"\n")
+#only accept string type for the match variable
+match=str(match)
 
 #parameter id number
 i=0
 
 #cookie to be include when GET requesting
-cookie={'level':'1','lang':'USD'}
+#example of cookie parameter is "level" with value equals "1"
+cookie={'level':'1'}
 
 #number of parameter id to test
 while i<=1000:
 
-        #URL target
-        url = "http://192.168.0.4/blog.php?author=%s" % i
+        #Testing IP connection
+        try:
+                #URL target
+                url = "http://192.168.0.11/blog.php?author=%s" % i
+                request = requests.get(url, cookies=cookie).text
 
-        request = requests.get(url, cookies=cookie).text
+        #If IPs can't be connect eachother, then exit the program
+        except ConnectionError:
+                print("Network connection failed to achieve, change network parameters")
+                sys.exit()
 
         #detect if an id number is valid
         if match not in request:
