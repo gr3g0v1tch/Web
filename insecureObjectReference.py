@@ -30,7 +30,7 @@ while i<=1000:
 
         #Testing IP connection
         try:
-                #URL target
+                #URL target example
                 url = "http://192.168.0.11/blog.php?author=%s" % i
                 request = requests.get(url, cookies=cookie).text
 
